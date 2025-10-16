@@ -55,8 +55,16 @@ const Signup = () => {
             setLoadingCities(true);
 
             try {
-                const response = await axios.post()
+                const response = await axios.post("https://countriesnow.space/api/v0.1/countries/cities", 
+                    {country: selectedCountry}
+                );
+                setCities(response.data?.data || [])
+            } catch (error) {
+                toast.error("Failed to load cities")
+            } finally {
+                setLoadingCities(false)
             }
         }
-    })
+        fetchCities();
+    }, [selectedCountry]);
 }
