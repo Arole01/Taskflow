@@ -32,4 +32,31 @@ const Signup = () => {
     const [selectedCountry,setSelectedCountry] = useState("")
     const [loadingCities,setLoadingCities] = useState(false)
     const {handleSubmit,register, formState:{errors}, setValue} = useForm({resolver:yupResolver(schema)})
+
+    useEffect(() => {
+        const fetchCountries = async () => {
+            try {
+                const response = await axios.get(
+                    "https://countriesnow.space/api/v0.1/countries/positions"
+                );
+
+                const countryList = response.data?.data?.map((c)=> c.name);
+                setCountries(countryList)
+            } catch (error) {
+                toast.error("Failed to load countries")
+            }
+        }
+        fetchCountries();
+    }, []);
+
+    useEffect (() => {
+        const fetchCities = async () => {
+            if (!selectedCountry) return;
+            setLoadingCities(true);
+
+            try {
+                const response = await axios.post()
+            }
+        }
+    })
 }
