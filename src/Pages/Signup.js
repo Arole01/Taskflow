@@ -23,3 +23,13 @@ const schema = Yup.object({
     country:Yup.string().required("Country is required"),
     city:Yup.string().required("City is required"),
 })
+
+const Signup = () => {
+    const [loading,setLoading] = useState(false);
+    const [showPassword,setShowPassword] = useState(false);
+    const [countries,setCountries] = useState([]);
+    const [cities,setCities] = useState([])
+    const [selectedCountry,setSelectedCountry] = useState("")
+    const [loadingCities,setLoadingCities] = useState(false)
+    const {handleSubmit,register, formState:{errors}, setValue} = useForm({resolver:yupResolver(schema)})
+}
