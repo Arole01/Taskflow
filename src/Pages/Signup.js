@@ -5,6 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import { Link } from "react-router-dom"
+import "./Signup.css"
 
 const schema = Yup.object({
     firstname:Yup.string().required().trim(),
@@ -18,7 +19,7 @@ const schema = Yup.object({
     confirmPassword: Yup.string().required("Confirm password id required")
     .oneOf([Yup.ref("password"),null], "Passwords must match"),
     gender:Yup.string().required("Please select your gender"),
-    dob:Yup.date().required("Date of birth is required"),
+    dob:Yup.date().required("Date of birth is required").typeError("Please enter a valid date"),
     address:Yup.string().required("Address is required"),
     country:Yup.string().required("Country is required"),
     city:Yup.string().required("City is required"),
@@ -82,8 +83,8 @@ const Signup = () => {
 
 
     return (
-        <div>
-            <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="signup-grid">
+            <form className="form-container" onSubmit={handleSubmit(onSubmit)}>
                 <h2>Create account</h2>
                 <label>First Name</label>
             <input type="text" placeholder="First name" {...register("firstname")}/>
@@ -127,11 +128,6 @@ const Signup = () => {
                 <input type="date" {...register("dob")}/>
                 {errors.dob && <p style={{color:"red"}}>{errors.dob.message}</p>}
 
-
-                <label>Address</label>
-                <input type="text" {...register("address")} placeholder="Enter your address"/>
-                {errors.address && <p style={{color:"red"}}>{errors.address.message}</p>}
-
                 <label>Country</label>
                 <select {...register("country")}
                 onChange={(e) => {
@@ -161,6 +157,10 @@ const Signup = () => {
                     ))}
                 </select>
                 {errors.city && <p style={{color:"red"}}>{errors.city.message}</p>}
+
+                <label>Address</label>
+                <input type="text" {...register("address")} placeholder="Enter your address"/>
+                {errors.address && <p style={{color:"red"}}>{errors.address.message}</p>}
             
             <button className="bttn" disabled={loading}>{loading? "Signing up": "Sign up"}</button>
             </form>
