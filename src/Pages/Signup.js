@@ -31,7 +31,7 @@ const Signup = () => {
     const [cities,setCities] = useState([])
     const [selectedCountry,setSelectedCountry] = useState("")
     const [loadingCities,setLoadingCities] = useState(false)
-    const {handleSubmit,register, formState:{errors}, setValue} = useForm({resolver:yupResolver(schema)})
+    const {handleSubmit,register, formState:{errors, isSubmitSuccessful}, reset,} = useForm({resolver:yupResolver(schema)})
 
     useEffect(() => {
         const fetchCountries = async () => {
@@ -67,4 +67,25 @@ const Signup = () => {
         }
         fetchCities();
     }, [selectedCountry]);
+
+
+    const onSubmit = (data) => {
+        setLoading(true);
+        toast.success(data?.message || "Signup successful")
+    }
+
+    useEffect(() => {
+        if (isSubmitSuccessful) {
+            reset();
+        }
+    },[isSubmitSuccessful, reset]);
+
+
+    return (
+        <div>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <h2>Create account</h2>
+            </form>
+        </div>
+    )
 }
