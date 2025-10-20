@@ -14,7 +14,8 @@ const Home = () => {
             localStorage.setItem("tasks", JSON.stringify(tasks));
         },[tasks]);
 
-    const addTask = () => {
+    const addTask = (e) => {
+        e.preventDefault();
         if (!newTask.trim() === "") return;
 
         const newTaskItem = {
@@ -44,15 +45,15 @@ const Home = () => {
         <div className="home-container">
             <h1>TaskFlow Dashboard</h1>
 
-                <div className="input-section">
+                <form className="input-section" onSubmit={addTask}>
             <input type="text"
                     value={newTask}
                     placeholder="Enter a new task"
                     onChange={(e) => setNewTask(e.target.value)}/>
 
-                    <button onClick={addTask}>Add Task</button>
+                    <button type="submit">Add Task</button>
 
-                    </div>
+                    </form>
 
                     <div className="task-list">
                         {tasks.length === 0 ? (
@@ -68,11 +69,17 @@ const Home = () => {
                                             {task.text}
                                         </span>
 
-                                <div className="task-nuttons">
-                                    <button onClick={() => toggleTask(task.id)}>
+                                <div className="task-buttons">
+                                    <button
+                                    className="complete-btn"
+                                    type="button"
+                                    onClick={() => toggleTask(task.index)}>
                                         {task.completed ? "undo" : "complete"}
                                     </button>
-                                    <button onClick={() => deleteTask(task.id)}>Delete</button>
+                                    <button
+                                    className="delete-btn"
+                                    type="button"
+                                    onClick={() => deleteTask(task.index)}>Delete</button>
                                 </div>
                                 </div>
                             ))
