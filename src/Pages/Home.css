@@ -1,21 +1,27 @@
 .home-container {
-    max-width: 500px;
+    max-width: 600px;
     margin: 50px auto;
     padding: 20px;
     text-align: center;
-    background-color: #f9f9f9;
-    border-radius: 12px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fdfdfd;
+    border-radius: 15px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #333;
 }
 
 .input-section {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
     margin-bottom: 20px;
+    justify-content: center;
 }
 
-.input-section input {
-    flex: 1;
+.input-section input,
+.input-section select {
     padding: 10px;
     border-radius: 8px;
     border: 1px solid #ccc;
@@ -31,34 +37,60 @@
 }
 
 .input-section button:hover {
-    background-color: #45a049;
+    background-color: #3e8e41;
+}
+
+.clear-all {
+    background-color: #f44336;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 15px;
 }
 
 .task-item {
+    background: white;
+    margin-bottom: 12px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    background: white;
-    margin-bottom: 10px;
-    padding: 10px 15px;
-    border-radius: 8px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    align-items: flex-start;
+    transition: all 0.3s ease;
 }
 
-.task-buttons button {
-    margin-left: 8px;
-    border: none;
-    border-radius: 5px;
-    padding: 6px 10px;
-    cursor: pointer;
+.task-item.completed {
+    background-color: #e0ffe0;
+    opacity: 0.8;
+}
+
+.task-info {
+    text-align: left;
+}
+
+.task-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .complete-btn {
     background-color: #2196f3;
     color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
 }
 
 .delete-btn {
     background-color: #f44336;
     color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
 }
