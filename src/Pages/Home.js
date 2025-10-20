@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 
 const Home = () => {
     const [tasks, setTasks] = useState([]);
@@ -7,7 +7,9 @@ const Home = () => {
     const addTask = () => {
         if (!newTask.trim()) return;
         setTasks([...tasks, { text: newTask, completed:false}]);
+
         setNewTask("");
+        
     };
 
     const toggleComplete = (index) => {
@@ -20,7 +22,14 @@ const Home = () => {
     const deleteTask = (index) => {
         setTasks(tasks.filter((_, i) => i !== index));
     };
+        useEffect(()=>{
+            const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+            setTasks(storedTasks)
+        }, []);
 
+        useEffect(()=> {
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+        },[tasks]);
     return (
         <div className="home">
             <h1>TaskFlow Dashboard</h1>
@@ -45,3 +54,6 @@ const Home = () => {
         </div>
     )
 }
+
+
+export default Home
